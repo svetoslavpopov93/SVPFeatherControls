@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SectionCellView : UIView
+@interface SVPSectionCellView : UIView
+
+- (instancetype)initWithSeparatorHeight:(CGFloat)height;
 
 @end

@@ -14,6 +14,8 @@
 		4BEC81CF1B97121E00FEE13C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4BEC81CE1B97121E00FEE13C /* Images.xcassets */; };
 		4BEC81D21B97121E00FEE13C /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4BEC81D01B97121E00FEE13C /* LaunchScreen.xib */; };
 		4BEC81DE1B97121E00FEE13C /* SVPAccordionViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BEC81DD1B97121E00FEE13C /* SVPAccordionViewTests.m */; };
+		4BEC81E91B97134100FEE13C /* SVPAccordion.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BEC81E81B97134100FEE13C /* SVPAccordion.m */; };
+		4BEC81ED1B97494B00FEE13C /* SVPSectionCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BEC81EC1B97494B00FEE13C /* SVPSectionCellView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +42,10 @@
 		4BEC81D71B97121E00FEE13C /* SVPAccordionViewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SVPAccordionViewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4BEC81DC1B97121E00FEE13C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4BEC81DD1B97121E00FEE13C /* SVPAccordionViewTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SVPAccordionViewTests.m; sourceTree = "<group>"; };
+		4BEC81E71B97134100FEE13C /* SVPAccordion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVPAccordion.h; sourceTree = "<group>"; };
+		4BEC81E81B97134100FEE13C /* SVPAccordion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVPAccordion.m; sourceTree = "<group>"; };
+		4BEC81EB1B97494B00FEE13C /* SVPSectionCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SVPSectionCellView.h; path = Views/SVPSectionCellView.h; sourceTree = "<group>"; };
+		4BEC81EC1B97494B00FEE13C /* SVPSectionCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SVPSectionCellView.m; path = Views/SVPSectionCellView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +87,8 @@
 		4BEC81C01B97121E00FEE13C /* SVPAccordionView */ = {
 			isa = PBXGroup;
 			children = (
+				4BEC81E71B97134100FEE13C /* SVPAccordion.h */,
+				4BEC81E81B97134100FEE13C /* SVPAccordion.m */,
 				4BEC81C51B97121E00FEE13C /* AppDelegate.h */,
 				4BEC81C61B97121E00FEE13C /* AppDelegate.m */,
 				4BEC81C81B97121E00FEE13C /* ViewController.h */,
@@ -89,6 +97,7 @@
 				4BEC81CE1B97121E00FEE13C /* Images.xcassets */,
 				4BEC81D01B97121E00FEE13C /* LaunchScreen.xib */,
 				4BEC81C11B97121E00FEE13C /* Supporting Files */,
+				4BEC81EA1B97492100FEE13C /* Views */,
 			);
 			path = SVPAccordionView;
 			sourceTree = "<group>";
@@ -117,6 +126,15 @@
 				4BEC81DC1B97121E00FEE13C /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		4BEC81EA1B97492100FEE13C /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				4BEC81EB1B97494B00FEE13C /* SVPSectionCellView.h */,
+				4BEC81EC1B97494B00FEE13C /* SVPSectionCellView.m */,
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -219,7 +237,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4BEC81E91B97134100FEE13C /* SVPAccordion.m in Sources */,
 				4BEC81CA1B97121E00FEE13C /* ViewController.m in Sources */,
+				4BEC81ED1B97494B00FEE13C /* SVPSectionCellView.m in Sources */,
 				4BEC81C71B97121E00FEE13C /* AppDelegate.m in Sources */,
 				4BEC81C41B97121E00FEE13C /* main.m in Sources */,
 			);
