@@ -52,7 +52,6 @@
 
 - (void)addSubviews{
     self.ySectionPosition = 0.0f;
-
     
     [_accordion setBackgroundColor:[UIColor blueColor]];
     [self addSubview:_accordion];
