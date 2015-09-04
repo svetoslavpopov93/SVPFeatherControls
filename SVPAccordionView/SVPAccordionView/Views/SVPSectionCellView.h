@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface SVPSectionCellView : UIView
+- (instancetype)initWithSectionElements:(NSArray*)sectionElements;
 
-- (instancetype)initWithSeparatorHeight:(CGFloat)height;
-
+- (void) setHeightConstraintConstant: (CGFloat)constant;
 @end

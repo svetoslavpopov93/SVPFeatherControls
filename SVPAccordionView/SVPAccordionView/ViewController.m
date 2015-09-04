@@ -10,7 +10,7 @@
 #import "SVPAccordion.h"
 
 @interface ViewController ()<SVPAccordionDataSource, SVPAccordionDelegate>
-
+@property (strong, nonatomic) SVPAccordion *accordion;
 @end
 
 @implementation ViewController
@@ -18,17 +18,22 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    SVPAccordion *accordion = [[SVPAccordion alloc] initWithFrame:CGRectMake(0, 0, 300, 300)];
-    accordion.datasource = self;
-    accordion.delegate = self;
-    [accordion reloadAccordion];
+    self.accordion = [[SVPAccordion alloc] initWithFrame:CGRectMake(10, 10, 300, 300)];
+    self.accordion.datasource = self;
+    self.accordion.delegate = self;
     
-    [self.view addSubview:accordion];
+    [self.view addSubview:self.accordion];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    
+    [self.accordion reloadAccordion];
 }
 
 #pragma mark - SVPAccordionDatasource
@@ -42,12 +47,17 @@
 }
 
 - (UIView *)cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return nil;
+    
+#warning TODO: FIX cellForRowAtIndexPath
+    UIView *rowCell = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.accordion.frame.size.width, 30)];
+    [rowCell setBackgroundColor:[UIColor blackColor]];
+    
+    return rowCell;
 }
 
 #pragma mark - SVPAccordionDelegate
 - (UIView *)viewForSectionHeaderAtIndex:(NSInteger)sectionIndex{
-    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), 30.0f)];
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.accordion.frame), 30.0f)];
     
     return headerView;
 }

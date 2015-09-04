@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@protocol SVPAccordionDataSource <NSObject, UITableViewDelegate>
+@protocol SVPAccordionDataSource <NSObject>
 
 @required
 - (NSInteger)numberOfSections;
