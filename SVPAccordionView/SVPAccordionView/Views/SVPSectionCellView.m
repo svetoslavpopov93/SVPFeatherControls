@@ -7,6 +7,8 @@
 //
 
 #import "SVPSectionCellView.h"
+#import "SVPSectionHeaderCellView.h"
+
 @interface SVPSectionCellView()
 @property (strong, nonatomic) UIView *contentView;
 @property (assign, nonatomic) CGFloat separatorHeight;
@@ -45,20 +47,15 @@
     if ([sectionElements count] > 0) {
         UIView *headerCell = [sectionElements objectAtIndex:0];
         [headerCell setBackgroundColor:[UIColor greenColor]];// temp
-        UIView *headerCellContainer = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMinX(headerCell.frame),
+        SVPSectionHeaderCellView *headerCellContainer = [[SVPSectionHeaderCellView alloc] initWithFrame:CGRectMake(CGRectGetMinX(headerCell.frame),
                                                                                CGRectGetMinY(headerCell.frame),
                                                                                CGRectGetWidth(headerCell.frame),
                                                                                CGRectGetHeight(headerCell.frame) - self.separatorHeight)];
+        
         UITapGestureRecognizer *singleFingerTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap:)];
         [headerCellContainer addGestureRecognizer:singleFingerTap];
         
-        UIView *separator = [[UIView alloc] initWithFrame:CGRectMake(0,
-                                                                     CGRectGetHeight(headerCellContainer.frame),
-                                                                     CGRectGetWidth(headerCellContainer.frame),
-                                                                     self.separatorHeight)];
-        [separator setBackgroundColor:[UIColor grayColor]];
-        [headerCellContainer addSubview:headerCell];
-        [headerCellContainer addSubview:separator];
+        [headerCellContainer.contentView addSubview:headerCell];
         
         [self addSubview:headerCellContainer];
         self.sectionElementsCount++;

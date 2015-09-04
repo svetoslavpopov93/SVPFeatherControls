@@ -117,6 +117,7 @@
     for (NSInteger index = 0; index < [self getNumberOfSections]; index++) {
         NSMutableArray *sectionElementsArray = [NSMutableArray new];
         [sectionElementsArray addObject:[self getViewForSectionHeaderAtIndex:index]];
+       
         NSInteger numberOfRows = [self getNumberOfRowsInSection:index];
         
         for (NSInteger rowIndex = 0; rowIndex < numberOfRows; rowIndex++) {

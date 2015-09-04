@@ -10,4 +10,7 @@
 
 @interface SVPSectionHeaderCellView : UIView
 
+@property (assign, nonatomic) CGFloat separatorHeight;
+@property(strong, nonatomic) UIView *contentView;
+
 @end
