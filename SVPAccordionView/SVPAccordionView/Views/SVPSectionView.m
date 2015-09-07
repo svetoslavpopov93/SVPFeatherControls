@@ -9,12 +9,11 @@
 #import "SVPSectionView.h"
 #import "SVPSectionHeaderCellView.h"
 #import "SVPSectionCellView.h"
+#import "SVPConstants.h"
 
-static const CGFloat sectionBaseHeight = 30.0f;
-@interface SVPSectionView()
+@interface SVPSectionView() <SVPSectionHeaderCellViewProtocol>
 @property (strong, nonatomic) UIView *contentView;
 @property (assign, nonatomic) CGFloat separatorHeight;
-@property (assign, nonatomic) NSInteger sectionElementsCount;
 @property (strong, nonatomic) NSLayoutConstraint *heightConstraint;
 @end
 
@@ -55,8 +54,7 @@ static const CGFloat sectionBaseHeight = 30.0f;
                                                                                CGRectGetWidth(headerCell.frame),
                                                                                CGRectGetHeight(headerCell.frame))];
         
-        UITapGestureRecognizer *singleFingerTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap:)];
-        [headerCellContainer addGestureRecognizer:singleFingerTap];
+        headerCellContainer.delegate = self;
         
         [headerCellContainer.contentView addSubview:headerCell];
         
@@ -81,34 +79,10 @@ static const CGFloat sectionBaseHeight = 30.0f;
     }
 }
 
-- (void)handleSingleTap:(UITapGestureRecognizer *)recognizer {
-    CGFloat sectionHeight = CGRectGetHeight(recognizer.view.superview.frame);
+-(void)userDidTapOnHeader{
     
-    if (sectionBaseHeight >= sectionHeight) {
-        sectionHeight = sectionHeight * self.sectionElementsCount;
-        
-        for (NSInteger index = 0; index < recognizer.view.superview.subviews.count; index++) {
-            
-            [(SVPSectionView*)(recognizer.view.superview) setHeightConstraintConstant:100.0];
-            [UIView animateWithDuration:0.5f animations:^{
-                [recognizer.view.superview layoutIfNeeded];
-                [recognizer.view.superview.superview layoutIfNeeded];
-            }];
-        }
-    } else {
-        sectionHeight = sectionBaseHeight;
-        
-        for (NSInteger index = 0; index < recognizer.view.superview.subviews.count; index++) {
-            
-            [(SVPSectionView*)(recognizer.view.superview) setHeightConstraintConstant:sectionHeight];
-            [UIView animateWithDuration:0.5f animations:^{
-                [recognizer.view.superview layoutIfNeeded];
-                [recognizer.view.superview.superview layoutIfNeeded];
-            }];
-        }
-    }
-    
-    NSLog(@""); // temp
+    [self.delegate sectionWillResize:self];
+    //    NSLog(@""); // temp
 }
 
 @end

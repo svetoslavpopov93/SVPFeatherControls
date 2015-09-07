@@ -35,6 +35,7 @@
 		4BE9C8701B99F8380050720F /* SVPSectionHeaderCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SVPSectionHeaderCellView.m; path = Views/SVPSectionHeaderCellView.m; sourceTree = "<group>"; };
 		4BEB9F1B1B9DE62800E69861 /* SVPSectionCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SVPSectionCellView.h; path = Views/SVPSectionCellView.h; sourceTree = "<group>"; };
 		4BEB9F1C1B9DE62800E69861 /* SVPSectionCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SVPSectionCellView.m; path = Views/SVPSectionCellView.m; sourceTree = "<group>"; };
+		4BEB9F1E1B9DFCE900E69861 /* SVPConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVPConstants.h; sourceTree = "<group>"; };
 		4BEC81BE1B97121E00FEE13C /* SVPAccordionView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SVPAccordionView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4BEC81C21B97121E00FEE13C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4BEC81C31B97121E00FEE13C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -104,6 +105,7 @@
 				4BEC81D01B97121E00FEE13C /* LaunchScreen.xib */,
 				4BEC81C11B97121E00FEE13C /* Supporting Files */,
 				4BEC81EA1B97492100FEE13C /* Views */,
+				4BEB9F1E1B9DFCE900E69861 /* SVPConstants.h */,
 			);
 			path = SVPAccordionView;
 			sourceTree = "<group>";

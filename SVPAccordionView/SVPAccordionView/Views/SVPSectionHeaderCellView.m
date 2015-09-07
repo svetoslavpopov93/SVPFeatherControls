@@ -13,20 +13,6 @@
 
 @implementation SVPSectionHeaderCellView
 
-- (instancetype)init
-{
-    self = [super init];
-    if (self) {
-        _separatorHeight = 1.0f;
-        _contentView = [[UIView alloc] init];
-        _separatorView = [[UIView alloc] init];
-        [_separatorView setBackgroundColor:[UIColor grayColor]];
-        
-        [self addSubviews];
-    }
-    return self;
-}
-
 -(void)layoutSubviews{
      [self setupConstraints];
 }
@@ -39,6 +25,9 @@
         _contentView = [[UIView alloc] init];
         _separatorView = [[UIView alloc] init];
         [_separatorView setBackgroundColor:[UIColor grayColor]];
+        
+        UITapGestureRecognizer *singleFingerTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap:)];
+        [self addGestureRecognizer:singleFingerTap];
         
         [self addSubviews];
     }
@@ -165,6 +154,11 @@
     [self addConstraint:separatorViewTrailingConstraint];
     [self addConstraint:separatorViewBottomConstraint];
 }
+
+- (void)handleSingleTap:(UITapGestureRecognizer *)recognizer {
+    [self.delegate userDidTapOnHeader];
+}
+
 
 @end
 

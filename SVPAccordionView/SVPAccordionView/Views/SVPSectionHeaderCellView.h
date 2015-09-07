@@ -8,9 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol SVPSectionHeaderCellViewProtocol <NSObject>
+
+@required
+- (void)userDidTapOnHeader;
+
+@end
+
 @interface SVPSectionHeaderCellView : UIView
 
 @property (assign, nonatomic) CGFloat separatorHeight;
-@property(strong, nonatomic) UIView *contentView;
+@property (strong, nonatomic) UIView *contentView;
+@property (weak, nonatomic) id<SVPSectionHeaderCellViewProtocol> delegate;
 
 @end

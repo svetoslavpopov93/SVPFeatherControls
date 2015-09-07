@@ -7,9 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
+@class SVPSectionView;
+@protocol SVPSectionViewProtocol <NSObject>
+
+@required
+-(void)sectionWillResize:(SVPSectionView*)section;
+
+@end
 
 @interface SVPSectionView : UIView
-- (instancetype)initWithSectionElements:(NSArray*)sectionElements;
+@property (weak, nonatomic) id<SVPSectionViewProtocol> delegate;
+@property (assign, nonatomic) NSInteger sectionElementsCount;
 
+- (instancetype)initWithSectionElements:(NSArray*)sectionElements;
 - (void) setHeightConstraintConstant: (CGFloat)constant;
 @end

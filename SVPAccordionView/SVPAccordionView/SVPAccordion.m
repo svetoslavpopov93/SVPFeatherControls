@@ -8,8 +8,9 @@
 
 #import "SVPAccordion.h"
 #import "SVPSectionView.h"
+#import "SVPConstants.h"
 
-@interface SVPAccordion()
+@interface SVPAccordion()<SVPSectionViewProtocol>
 
 @property (strong, nonatomic) UIScrollView *accordion;
 @property (strong, nonatomic) NSArray *sections;
@@ -109,6 +110,7 @@
         }
         
         SVPSectionView *sectionCell = [[SVPSectionView alloc] initWithSectionElements:[NSArray arrayWithArray:sectionElementsArray]];
+        sectionCell.delegate = self;
         
         // TEMP
         if (index % 2 == 0) {
@@ -227,6 +229,41 @@
     }
     
     return 0.0f;
+}
+
+#pragma mark - SVPSectionViewProtocol
+-(void)sectionWillResize:(SVPSectionView *)section{
+    CGFloat sectionHeight = sectionBaseHeight;
+    
+    for (id sectionCell in self.accordion.subviews) {
+        if ( [sectionCell isKindOfClass:[SVPSectionView class]] ) {
+            if (sectionCell == section) {
+                sectionHeight = sectionHeight * section.sectionElementsCount;
+                
+                for (NSInteger index = 0; index < self.subviews.count; index++) {
+                    [section setHeightConstraintConstant:sectionHeight];
+                    
+                    [UIView animateWithDuration:0.5f animations:^{
+                        [self layoutIfNeeded];
+                        [self layoutIfNeeded];
+                    }];
+                }
+                
+                continue;
+            } // end if
+            
+            sectionHeight = sectionBaseHeight;
+            
+            for (NSInteger index = 0; index < self.subviews.count; index++) {
+                [section setHeightConstraintConstant:sectionHeight];
+                
+                [UIView animateWithDuration:0.5f animations:^{
+                    [self layoutIfNeeded];
+                    [self layoutIfNeeded];
+                }];
+            }
+        }
+    }
 }
 
 @end
