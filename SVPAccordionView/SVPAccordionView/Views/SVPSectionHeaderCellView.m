@@ -28,7 +28,7 @@
 }
 
 -(void)layoutSubviews{
-     [self addConstraints];
+     [self setupConstraints];
 }
 
 - (instancetype)initWithFrame:(CGRect)frame
@@ -50,7 +50,7 @@
     [self addSubview:self.separatorView];
 }
 
-- (void)addConstraints{
+- (void)setupConstraints{
     [self setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.contentView setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.separatorView setTranslatesAutoresizingMaskIntoConstraints:NO];
@@ -61,7 +61,7 @@
                                                                            toItem:nil
                                                                         attribute:0
                                                                        multiplier:1
-                                                                         constant:CGRectGetHeight(self.superview.frame) + self.separatorHeight];
+                                                                         constant:CGRectGetHeight(self.superview.frame)];
     
     NSLayoutConstraint *headerCellLeadingConstraint = [NSLayoutConstraint constraintWithItem:self
                                                                          attribute:NSLayoutAttributeLeading

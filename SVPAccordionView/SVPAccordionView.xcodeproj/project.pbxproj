@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4BE9C8711B99F8380050720F /* SVPSectionHeaderCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BE9C8701B99F8380050720F /* SVPSectionHeaderCellView.m */; };
+		4BEB9F1D1B9DE62800E69861 /* SVPSectionCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BEB9F1C1B9DE62800E69861 /* SVPSectionCellView.m */; };
 		4BEC81C41B97121E00FEE13C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BEC81C31B97121E00FEE13C /* main.m */; };
 		4BEC81C71B97121E00FEE13C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BEC81C61B97121E00FEE13C /* AppDelegate.m */; };
 		4BEC81CA1B97121E00FEE13C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BEC81C91B97121E00FEE13C /* ViewController.m */; };
@@ -16,7 +17,7 @@
 		4BEC81D21B97121E00FEE13C /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4BEC81D01B97121E00FEE13C /* LaunchScreen.xib */; };
 		4BEC81DE1B97121E00FEE13C /* SVPAccordionViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BEC81DD1B97121E00FEE13C /* SVPAccordionViewTests.m */; };
 		4BEC81E91B97134100FEE13C /* SVPAccordion.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BEC81E81B97134100FEE13C /* SVPAccordion.m */; };
-		4BEC81ED1B97494B00FEE13C /* SVPSectionCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BEC81EC1B97494B00FEE13C /* SVPSectionCellView.m */; };
+		4BEC81ED1B97494B00FEE13C /* SVPSectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BEC81EC1B97494B00FEE13C /* SVPSectionView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,6 +33,8 @@
 /* Begin PBXFileReference section */
 		4BE9C86F1B99F8380050720F /* SVPSectionHeaderCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SVPSectionHeaderCellView.h; path = Views/SVPSectionHeaderCellView.h; sourceTree = "<group>"; };
 		4BE9C8701B99F8380050720F /* SVPSectionHeaderCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SVPSectionHeaderCellView.m; path = Views/SVPSectionHeaderCellView.m; sourceTree = "<group>"; };
+		4BEB9F1B1B9DE62800E69861 /* SVPSectionCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SVPSectionCellView.h; path = Views/SVPSectionCellView.h; sourceTree = "<group>"; };
+		4BEB9F1C1B9DE62800E69861 /* SVPSectionCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SVPSectionCellView.m; path = Views/SVPSectionCellView.m; sourceTree = "<group>"; };
 		4BEC81BE1B97121E00FEE13C /* SVPAccordionView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SVPAccordionView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4BEC81C21B97121E00FEE13C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4BEC81C31B97121E00FEE13C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -47,8 +50,8 @@
 		4BEC81DD1B97121E00FEE13C /* SVPAccordionViewTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SVPAccordionViewTests.m; sourceTree = "<group>"; };
 		4BEC81E71B97134100FEE13C /* SVPAccordion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVPAccordion.h; sourceTree = "<group>"; };
 		4BEC81E81B97134100FEE13C /* SVPAccordion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVPAccordion.m; sourceTree = "<group>"; };
-		4BEC81EB1B97494B00FEE13C /* SVPSectionCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SVPSectionCellView.h; path = Views/SVPSectionCellView.h; sourceTree = "<group>"; };
-		4BEC81EC1B97494B00FEE13C /* SVPSectionCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SVPSectionCellView.m; path = Views/SVPSectionCellView.m; sourceTree = "<group>"; };
+		4BEC81EB1B97494B00FEE13C /* SVPSectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SVPSectionView.h; path = Views/SVPSectionView.h; sourceTree = "<group>"; };
+		4BEC81EC1B97494B00FEE13C /* SVPSectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SVPSectionView.m; path = Views/SVPSectionView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,10 +137,12 @@
 		4BEC81EA1B97492100FEE13C /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				4BEC81EB1B97494B00FEE13C /* SVPSectionCellView.h */,
-				4BEC81EC1B97494B00FEE13C /* SVPSectionCellView.m */,
+				4BEC81EB1B97494B00FEE13C /* SVPSectionView.h */,
+				4BEC81EC1B97494B00FEE13C /* SVPSectionView.m */,
 				4BE9C86F1B99F8380050720F /* SVPSectionHeaderCellView.h */,
 				4BE9C8701B99F8380050720F /* SVPSectionHeaderCellView.m */,
+				4BEB9F1B1B9DE62800E69861 /* SVPSectionCellView.h */,
+				4BEB9F1C1B9DE62800E69861 /* SVPSectionCellView.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -243,8 +248,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				4BEC81E91B97134100FEE13C /* SVPAccordion.m in Sources */,
+				4BEB9F1D1B9DE62800E69861 /* SVPSectionCellView.m in Sources */,
 				4BEC81CA1B97121E00FEE13C /* ViewController.m in Sources */,
-				4BEC81ED1B97494B00FEE13C /* SVPSectionCellView.m in Sources */,
+				4BEC81ED1B97494B00FEE13C /* SVPSectionView.m in Sources */,
 				4BEC81C71B97121E00FEE13C /* AppDelegate.m in Sources */,
 				4BEC81C41B97121E00FEE13C /* main.m in Sources */,
 				4BE9C8711B99F8380050720F /* SVPSectionHeaderCellView.m in Sources */,

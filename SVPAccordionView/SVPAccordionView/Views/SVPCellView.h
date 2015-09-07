@@ -1,5 +1,5 @@
 //
-//  SVPSectionCellView.h
+//  SVPCellView.h
 //  SVPAccordionView
 //
 //  Created by Svetoslav Popov on 9/7/15.
@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SVPSectionCellView : UIView
-
-@property (strong, nonatomic) UIView *contentView;
+@interface SVPCellView : UIView
 
 @end

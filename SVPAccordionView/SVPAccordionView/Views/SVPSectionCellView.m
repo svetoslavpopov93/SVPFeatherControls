@@ -1,120 +1,64 @@
 //
-//  SectionCellView.m
+//  SVPSectionCellView.m
 //  SVPAccordionView
 //
-//  Created by Svetoslav Popov on 9/2/15.
+//  Created by Svetoslav Popov on 9/7/15.
 //  Copyright (c) 2015 Svetoslav Popov. All rights reserved.
 //
 
 #import "SVPSectionCellView.h"
-#import "SVPSectionHeaderCellView.h"
 
 @interface SVPSectionCellView()
-@property (strong, nonatomic) UIView *contentView;
-@property (assign, nonatomic) CGFloat separatorHeight;
-@property (assign, nonatomic) NSInteger sectionElementsCount;
-@property (strong, nonatomic) NSLayoutConstraint *heightConstraint;
+@property (strong, nonatomic) UIView *separatorView;
 @end
 
 @implementation SVPSectionCellView
 
-- (instancetype)initWithSectionElements:(NSArray*)sectionElements {
+- (instancetype)init
+{
     self = [super init];
-    
     if (self) {
-        _separatorHeight = 1.0f;
-        _sectionElementsCount = 0;
-        [self addSectionViews:sectionElements];
-        [self setTranslatesAutoresizingMaskIntoConstraints:NO];
-        _heightConstraint = [NSLayoutConstraint constraintWithItem:self
-                                                         attribute:NSLayoutAttributeHeight
-                                                         relatedBy:NSLayoutRelationEqual
-                                                            toItem:nil
-                                                         attribute:0
-                                                        multiplier:1
-                                                          constant:30.0f];
-        [self addConstraint:_heightConstraint];
-    }
+        _separatorView = [[UIView alloc] init];
+        _contentView = [[UIView alloc] init];
     
+        [self addSubview:_separatorView];
+        [self addSubview:_contentView];
+        
+        [_separatorView setBackgroundColor:[UIColor grayColor]];
+        
+        [self layoutIfNeeded];
+    }
     return self;
 }
 
-- (void) setHeightConstraintConstant: (CGFloat)constant{
-    [self.heightConstraint setConstant:constant];
+- (void)layoutIfNeeded{
+    [super layoutIfNeeded];
+    
+    [self setupConstraints];
 }
 
-- (void)addSectionViews:(NSArray*)sectionElements {
-    if ([sectionElements count] > 0) {
-        UIView *headerCell = [sectionElements objectAtIndex:0];
-        [headerCell setBackgroundColor:[UIColor greenColor]];// temp
-        SVPSectionHeaderCellView *headerCellContainer = [[SVPSectionHeaderCellView alloc] initWithFrame:CGRectMake(CGRectGetMinX(headerCell.frame),
-                                                                               CGRectGetMinY(headerCell.frame),
-                                                                               CGRectGetWidth(headerCell.frame),
-                                                                               CGRectGetHeight(headerCell.frame) - self.separatorHeight)];
-        
-        UITapGestureRecognizer *singleFingerTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap:)];
-        [headerCellContainer addGestureRecognizer:singleFingerTap];
-        
-        [headerCellContainer.contentView addSubview:headerCell];
-        
-        [self addSubview:headerCellContainer];
-        self.sectionElementsCount++;
-        
-        for (NSInteger index = 1; index < [sectionElements count]; index++) {
-            UIView *cell =[sectionElements objectAtIndex:index];
-            
-            UIView *cellContainer = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMinX(cell.frame),
-                                                                             CGRectGetMinY(cell.frame),
-                                                                             CGRectGetWidth(cell.frame),
-                                                                             CGRectGetHeight(cell.frame) + self.separatorHeight)];
-            
-            UIView *separator = [[UIView alloc] initWithFrame:CGRectMake(0,
-                                                                         CGRectGetHeight(cellContainer.frame) - self.separatorHeight,
-                                                                         CGRectGetWidth(cellContainer.frame),
-                                                                         self.separatorHeight)];
-            
-            [separator setBackgroundColor:[UIColor grayColor]];
-            
-            [cellContainer addSubview:cell];
-            [cellContainer addSubview:separator];
-            [self insertSubview:cellContainer belowSubview:headerCellContainer];
-            self.sectionElementsCount++;
-        }
-    }
-}
+- (void)setupConstraints {
+    [self.contentView setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [self.separatorView setTranslatesAutoresizingMaskIntoConstraints:NO];
 
-- (void)handleSingleTap:(UITapGestureRecognizer *)recognizer {
-    CGFloat headerHeight =CGRectGetHeight(recognizer.view.frame);
-    CGFloat sectionHeight = CGRectGetHeight(recognizer.view.superview.frame);
+    NSDictionary *views = NSDictionaryOfVariableBindings(_contentView, _separatorView);
     
-    if (headerHeight >= sectionHeight) {
-        sectionHeight = sectionHeight * self.sectionElementsCount;
-        
-        for (NSInteger index = 0; index < recognizer.view.superview.subviews.count; index++) {
-            
-            [(SVPSectionCellView*)(recognizer.view.superview) setHeightConstraintConstant:100.0];
-            [UIView animateWithDuration:0.5f animations:^{
-                [recognizer.view.superview layoutIfNeeded];
-                [recognizer.view.superview.superview layoutIfNeeded];
-            }];
-        }
-    } else {
-        sectionHeight = headerHeight;
-        
-        for (NSInteger index = 0; index < recognizer.view.superview.subviews.count; index++) {
-            
-            [(SVPSectionCellView*)(recognizer.view.superview) setHeightConstraintConstant:sectionHeight];
-            [UIView animateWithDuration:0.5f animations:^{
-                [recognizer.view.superview layoutIfNeeded];
-                [recognizer.view.superview.superview layoutIfNeeded];
-            }];
-        }
-    }
+    NSArray *horizontalConstraintsForContentView = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_contentView]|"
+                                                                                           options:0
+                                                                                           metrics:nil
+                                                                                             views:views];
     
-    
-    NSLog(@""); // temp
+    NSArray *horizontalConstraintsForSeparatorView = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_separatorView]|"
+                                                                                             options:0
+                                                                                             metrics:nil
+                                                                                               views:views];
+    NSArray *verticalConstraintsForContentViewAndSeparatorView = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_contentView][_separatorView(1)]|"
+                                                                                                         options:0
+                                                                                                         metrics:nil
+                                                                                                           views:views];
+    [self addConstraints:horizontalConstraintsForContentView];
+    [self addConstraints:horizontalConstraintsForSeparatorView];
+    [self addConstraints:verticalConstraintsForContentViewAndSeparatorView];
 }
 
 @end
-
-#warning TODO: Fix separator height on every place

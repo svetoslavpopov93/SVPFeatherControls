@@ -7,7 +7,7 @@
 //
 
 #import "SVPAccordion.h"
-#import "SVPSectionCellView.h"
+#import "SVPSectionView.h"
 
 @interface SVPAccordion()
 
@@ -95,22 +95,7 @@
     [self addConstraint:topConstraint];
     [self addConstraint:trailingConstraint];
     [self addConstraint:bottomConstraint];
-    
-    
-//    NSDictionary *views = NSDictionaryOfVariableBindings(_accordion);
-//    
-//    NSArray *accordionHorizontalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_accordion]|"
-//                                                                                      options:0
-//                                                                                      metrics:nil
-//                                                                                        views:views];
-//    
-//    NSArray *accordionVerticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_accordion]|"
-//                                                                                    options:0
-//                                                                                    metrics:nil
-//                                                                                      views:views];
-//    [self addConstraints:accordionHorizontalConstraints];
-//    [self addConstraints:accordionVerticalConstraints];
-}
+ }
 
 - (void) reloadAccordion{    
     for (NSInteger index = 0; index < [self getNumberOfSections]; index++) {
@@ -123,7 +108,7 @@
             [sectionElementsArray addObject: [self getCellForRowAtIndexPath:[NSIndexPath indexPathForRow:rowIndex inSection:index]]];
         }
         
-        SVPSectionCellView *sectionCell = [[SVPSectionCellView alloc] initWithSectionElements:[NSArray arrayWithArray:sectionElementsArray]];
+        SVPSectionView *sectionCell = [[SVPSectionView alloc] initWithSectionElements:[NSArray arrayWithArray:sectionElementsArray]];
         
         // TEMP
         if (index % 2 == 0) {
