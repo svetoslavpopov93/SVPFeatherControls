@@ -18,6 +18,7 @@
 @interface SVPSectionView : UIView
 @property (weak, nonatomic) id<SVPSectionViewProtocol> delegate;
 @property (assign, nonatomic) NSInteger sectionElementsCount;
+@property (strong, nonatomic) NSLayoutConstraint *heightConstraint;
 
 - (instancetype)initWithSectionElements:(NSArray*)sectionElements;
 - (void) setHeightConstraintConstant: (CGFloat)constant;

@@ -14,7 +14,6 @@
 @interface SVPSectionView() <SVPSectionHeaderCellViewProtocol>
 @property (strong, nonatomic) UIView *contentView;
 @property (assign, nonatomic) CGFloat separatorHeight;
-@property (strong, nonatomic) NSLayoutConstraint *heightConstraint;
 @end
 
 @implementation SVPSectionView

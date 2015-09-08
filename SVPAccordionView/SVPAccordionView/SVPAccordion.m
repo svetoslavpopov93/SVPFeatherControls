@@ -233,34 +233,38 @@
 
 #pragma mark - SVPSectionViewProtocol
 -(void)sectionWillResize:(SVPSectionView *)section{
-    CGFloat sectionHeight = sectionBaseHeight;
-    
     for (id sectionCell in self.accordion.subviews) {
         if ( [sectionCell isKindOfClass:[SVPSectionView class]] ) {
-            if (sectionCell == section) {
-                sectionHeight = sectionHeight * section.sectionElementsCount;
+            CGFloat sectionHeight;
+            
+            if (!(sectionCell == section)) {
+                sectionHeight = sectionBaseHeight;
+                [sectionCell setHeightConstraintConstant:sectionHeight];
                 
-                for (NSInteger index = 0; index < self.subviews.count; index++) {
+                [UIView animateWithDuration:0.5f animations:^{
+                    [self layoutIfNeeded];
+                }];
+            } else {
+                sectionHeight = section.heightConstraint.constant;
+                
+                if (sectionHeight <= sectionBaseHeight) {
+                    // TODO: fix number of sections
+                    sectionHeight = sectionBaseHeight * 5;
                     [section setHeightConstraintConstant:sectionHeight];
                     
                     [UIView animateWithDuration:0.5f animations:^{
                         [self layoutIfNeeded];
+                    }];
+                } else{
+                    // TODO: fix number of sections
+                    sectionHeight = sectionBaseHeight;
+                    [section setHeightConstraintConstant:sectionHeight];
+                    
+                    [UIView animateWithDuration:0.5f animations:^{
                         [self layoutIfNeeded];
                     }];
+
                 }
-                
-                continue;
-            } // end if
-            
-            sectionHeight = sectionBaseHeight;
-            
-            for (NSInteger index = 0; index < self.subviews.count; index++) {
-                [section setHeightConstraintConstant:sectionHeight];
-                
-                [UIView animateWithDuration:0.5f animations:^{
-                    [self layoutIfNeeded];
-                    [self layoutIfNeeded];
-                }];
             }
         }
     }
