@@ -11,5 +11,6 @@
 @interface SVPSectionCellView : UIView
 
 @property (strong, nonatomic) UIView *contentView;
+@property (strong, nonatomic) NSLayoutConstraint *topConstraint;
 
 @end

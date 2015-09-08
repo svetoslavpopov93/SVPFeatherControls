@@ -46,42 +46,76 @@
 
 - (void)addSectionViews:(NSArray*)sectionElements {
     if ([sectionElements count] > 0) {
-        UIView *headerCell = [sectionElements objectAtIndex:0];
-        [headerCell setBackgroundColor:[UIColor greenColor]];// temp
-        SVPSectionHeaderCellView *headerCellContainer = [[SVPSectionHeaderCellView alloc] initWithFrame:CGRectMake(CGRectGetMinX(headerCell.frame),
-                                                                               CGRectGetMinY(headerCell.frame),
-                                                                               CGRectGetWidth(headerCell.frame),
-                                                                               CGRectGetHeight(headerCell.frame))];
+        UIView *headerCellContentView = [sectionElements objectAtIndex:0];
+        SVPSectionHeaderCellView *headerCellContainer = [[SVPSectionHeaderCellView alloc] initWithContentView:headerCellContentView];
         
         headerCellContainer.delegate = self;
         
-        [headerCellContainer.contentView addSubview:headerCell];
-        
         [self addSubview:headerCellContainer];
         self.sectionElementsCount++;
+        
+        UIView *previousElement = headerCellContainer;
         
         for (NSInteger index = 1; index < [sectionElements count]; index++) {
             UIView *cell =[sectionElements objectAtIndex:index];
             
             SVPSectionCellView *sectionCell = [[SVPSectionCellView alloc] init];
-            [sectionCell setFrame:CGRectMake(CGRectGetMinX(cell.frame),
-                                            CGRectGetMinY(cell.frame),
-                                            CGRectGetWidth(cell.frame),
-                                             CGRectGetHeight(cell.frame))];
-            
             
             [sectionCell.contentView addSubview:cell];
             
             [self insertSubview:sectionCell belowSubview:headerCellContainer];
+            [self setupSectionCellConstraints:sectionCell fromPreviousView:previousElement];
+            
             self.sectionElementsCount++;
+            previousElement = sectionCell;
         }
     }
 }
 
--(void)userDidTapOnHeader{
+- (void)setupSectionCellConstraints:(SVPSectionCellView*)cell fromPreviousView:(UIView*)previousElement {
+    [cell setTranslatesAutoresizingMaskIntoConstraints:NO];
     
+    NSLayoutConstraint *heightConstraint = [NSLayoutConstraint constraintWithItem:cell
+                                                                        attribute:NSLayoutAttributeHeight
+                                                                        relatedBy:NSLayoutRelationEqual
+                                                                           toItem:previousElement
+                                                                        attribute:NSLayoutAttributeHeight
+                                                                       multiplier:1.0f
+                                                                         constant:0.0f];
+    
+    NSLayoutConstraint *leadingConstraint = [NSLayoutConstraint constraintWithItem:cell
+                                                                        attribute:NSLayoutAttributeLeading
+                                                                        relatedBy:NSLayoutRelationEqual
+                                                                           toItem:previousElement
+                                                                        attribute:NSLayoutAttributeLeading
+                                                                       multiplier:1.0f
+                                                                         constant:0.0f];
+    
+    NSLayoutConstraint *trailingConstraint = [NSLayoutConstraint constraintWithItem:cell
+                                                                        attribute:NSLayoutAttributeTrailing
+                                                                        relatedBy:NSLayoutRelationEqual
+                                                                           toItem:previousElement
+                                                                        attribute:NSLayoutAttributeTrailing
+                                                                       multiplier:1.0f
+                                                                         constant:0.0f];
+    
+    NSLayoutConstraint *topConstraint = [NSLayoutConstraint constraintWithItem:cell
+                                                                        attribute:NSLayoutAttributeTop
+                                                                        relatedBy:NSLayoutRelationEqual
+                                                                           toItem:previousElement
+                                                                        attribute:NSLayoutAttributeBottom
+                                                                       multiplier:1.0f
+                                                                         constant:sectionBaseHeight * -1];
+    
+    [self addConstraint:heightConstraint];
+    [self addConstraint:leadingConstraint];
+    [self addConstraint:trailingConstraint];
+    [cell setTopConstraint:topConstraint];
+    [self addConstraint:[cell topConstraint]];
+}
+
+-(void)userDidTapOnHeader{
     [self.delegate sectionWillResize:self];
-    //    NSLog(@""); // temp
 }
 
 @end

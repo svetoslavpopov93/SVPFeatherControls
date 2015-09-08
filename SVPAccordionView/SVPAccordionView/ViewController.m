@@ -43,14 +43,19 @@
 }
 
 - (NSInteger)numberOfRowsInSection:(NSInteger)sectionIndex{
-    return 2;
+    if (sectionIndex == 0) {
+        return 5;
+    } else if(sectionIndex == 1){
+        return 2;
+    } else{
+        return 3;
+    }
 }
 
 - (UIView *)cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
 #warning TODO: FIX cellForRowAtIndexPath
     UIView *rowCell = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.accordion.frame.size.width, 30)];
-    [rowCell setBackgroundColor:[UIColor blackColor]];
     
     return rowCell;
 }

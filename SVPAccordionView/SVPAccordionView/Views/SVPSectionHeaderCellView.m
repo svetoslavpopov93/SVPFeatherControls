@@ -7,6 +7,8 @@
 //
 
 #import "SVPSectionHeaderCellView.h"
+#import "SVPConstants.h"
+
 @interface SVPSectionHeaderCellView()
 @property (strong, nonatomic) UIView *separatorView;
 @end
@@ -17,22 +19,60 @@
      [self setupConstraints];
 }
 
-- (instancetype)initWithFrame:(CGRect)frame
+- (instancetype)initWithContentView:(UIView*)contentView
 {
-    self = [super initWithFrame:frame];
+    self = [super initWithFrame:contentView.frame];
     if (self) {
         _separatorHeight = 1.0f;
-        _contentView = [[UIView alloc] init];
+        _contentView = contentView;
+        [_contentView setBackgroundColor:[UIColor greenColor]];// temp
+        
         _separatorView = [[UIView alloc] init];
         [_separatorView setBackgroundColor:[UIColor grayColor]];
+        
+        _title = [[UILabel alloc] init];
+        _title.textColor = [UIColor blueColor];
+        _title.backgroundColor=[UIColor purpleColor];
+        _title.textColor=[UIColor whiteColor];
+        _title.userInteractionEnabled=NO;
+        _title.text= @"TEST"; // temp
+        [_contentView addSubview:_title];
         
         UITapGestureRecognizer *singleFingerTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap:)];
         [self addGestureRecognizer:singleFingerTap];
         
         [self addSubviews];
     }
+
     return self;
 }
+
+//- (instancetype)initWithFrame:(CGRect)frame
+//{
+//    self = [super initWithFrame:frame];
+//    if (self) {
+//        _separatorHeight = 1.0f;
+//        _contentView = [[UIView alloc] init];
+//        [_contentView setBackgroundColor:[UIColor greenColor]];// temp
+//        
+//        _separatorView = [[UIView alloc] init];
+//        [_separatorView setBackgroundColor:[UIColor grayColor]];
+//        
+//        _title = [[UILabel alloc] init];
+//        _title.textColor = [UIColor blueColor];
+//        _title.backgroundColor=[UIColor purpleColor];
+//        _title.textColor=[UIColor whiteColor];
+//        _title.userInteractionEnabled=NO;
+//        _title.text= @"TEST"; // temp
+//        [_contentView addSubview:_title];
+//        
+//        UITapGestureRecognizer *singleFingerTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap:)];
+//        [self addGestureRecognizer:singleFingerTap];
+//        
+//        [self addSubviews];
+//    }
+//    return self;
+//}
 
 - (void)addSubviews{
     [self addSubview:self.contentView];
@@ -42,6 +82,7 @@
 - (void)setupConstraints{
     [self setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.contentView setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [self.title setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.separatorView setTranslatesAutoresizingMaskIntoConstraints:NO];
     
     NSLayoutConstraint *headerCellHeightConstraint = [NSLayoutConstraint constraintWithItem:self
@@ -50,7 +91,7 @@
                                                                            toItem:nil
                                                                         attribute:0
                                                                        multiplier:1
-                                                                         constant:CGRectGetHeight(self.superview.frame)];
+                                                                         constant:sectionBaseHeight];
     
     NSLayoutConstraint *headerCellLeadingConstraint = [NSLayoutConstraint constraintWithItem:self
                                                                          attribute:NSLayoutAttributeLeading
@@ -80,6 +121,7 @@
     [self.superview addConstraint:headerCellTopConstraint];
     [self.superview addConstraint:headerCellTrailingConstraint];
     
+    // contentView constraints
     NSLayoutConstraint *contentViewLeadingConstraint = [NSLayoutConstraint constraintWithItem:self.contentView
                                                                                     attribute:NSLayoutAttributeLeading 
                                                                                     relatedBy:NSLayoutRelationEqual
@@ -111,7 +153,24 @@
                                                                                    attribute:NSLayoutAttributeBottom
                                                                                   multiplier:1
                                                                                     constant:0];
+    // title constraints
+    NSLayoutConstraint *titleCenterXConstraint = [NSLayoutConstraint constraintWithItem:self.title
+                                                                              attribute:NSLayoutAttributeCenterX 
+                                                                              relatedBy:NSLayoutRelationEqual 
+                                                                                 toItem:self.contentView
+                                                                              attribute:NSLayoutAttributeCenterX 
+                                                                             multiplier:1.0f
+                                                                               constant:0.0f];
     
+    NSLayoutConstraint *titleCenterYConstraint = [NSLayoutConstraint constraintWithItem:self.title
+                                                                              attribute:NSLayoutAttributeCenterY
+                                                                              relatedBy:NSLayoutRelationEqual
+                                                                                 toItem:self.contentView
+                                                                              attribute:NSLayoutAttributeCenterY 
+                                                                             multiplier:1.0f
+                                                                               constant:0.0f];
+    
+    // separatorView constraints
     NSLayoutConstraint *separatorViewHeightConstraint = [NSLayoutConstraint constraintWithItem:self.separatorView
                                                                                      attribute:NSLayoutAttributeHeight
                                                                                      relatedBy:NSLayoutRelationEqual
@@ -148,6 +207,9 @@
     [self addConstraint:contentViewTopConstraint];
     [self addConstraint:contentViewTrailingConstraint];
     [self addConstraint:contentViewBottomConstraint];
+    
+    [self.contentView addConstraint:titleCenterXConstraint];
+    [self.contentView addConstraint:titleCenterYConstraint];
     
     [self.separatorView addConstraint:separatorViewHeightConstraint];
     [self addConstraint:separatorViewLeadingConstraint];

@@ -19,6 +19,10 @@
 
 @property (assign, nonatomic) CGFloat separatorHeight;
 @property (strong, nonatomic) UIView *contentView;
+@property (strong, nonatomic) UILabel *title;
 @property (weak, nonatomic) id<SVPSectionHeaderCellViewProtocol> delegate;
+
+- (instancetype)initWithContentView:(UIView*)contentView;
+- (void)setupConstraints;
 
 @end

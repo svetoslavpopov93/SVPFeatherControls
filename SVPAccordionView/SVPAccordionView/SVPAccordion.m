@@ -9,6 +9,7 @@
 #import "SVPAccordion.h"
 #import "SVPSectionView.h"
 #import "SVPConstants.h"
+#import "SVPSectionCellView.h"
 
 @interface SVPAccordion()<SVPSectionViewProtocol>
 
@@ -241,6 +242,12 @@
                 sectionHeight = sectionBaseHeight;
                 [sectionCell setHeightConstraintConstant:sectionHeight];
                 
+                for (id sectionElement in [(SVPSectionView*)sectionCell subviews]) {
+                    if ([sectionElement isKindOfClass:[SVPSectionCellView class]]) {
+                        [[(SVPSectionCellView*)sectionElement topConstraint] setConstant:[[sectionCell heightConstraint] constant] * -1];
+                    }
+                }
+                
                 [UIView animateWithDuration:0.5f animations:^{
                     [self layoutIfNeeded];
                 }];
@@ -248,9 +255,14 @@
                 sectionHeight = section.heightConstraint.constant;
                 
                 if (sectionHeight <= sectionBaseHeight) {
-                    // TODO: fix number of sections
-                    sectionHeight = sectionBaseHeight * 5;
+                    sectionHeight = sectionBaseHeight * section.sectionElementsCount;
                     [section setHeightConstraintConstant:sectionHeight];
+                    
+                    for (id sectionElement in [(SVPSectionView*)sectionCell subviews]) {
+                        if ([sectionElement isKindOfClass:[SVPSectionCellView class]]) {
+                            [[(SVPSectionCellView*)sectionElement topConstraint] setConstant:0.0f];
+                        }
+                    }
                     
                     [UIView animateWithDuration:0.5f animations:^{
                         [self layoutIfNeeded];
@@ -259,6 +271,12 @@
                     // TODO: fix number of sections
                     sectionHeight = sectionBaseHeight;
                     [section setHeightConstraintConstant:sectionHeight];
+                    
+                    for (id sectionElement in [(SVPSectionView*)sectionCell subviews]) {
+                        if ([sectionElement isKindOfClass:[SVPSectionCellView class]]) {
+                            [[(SVPSectionCellView*)sectionElement topConstraint] setConstant:[[sectionCell heightConstraint] constant] * -1];
+                        }
+                    }
                     
                     [UIView animateWithDuration:0.5f animations:^{
                         [self layoutIfNeeded];
