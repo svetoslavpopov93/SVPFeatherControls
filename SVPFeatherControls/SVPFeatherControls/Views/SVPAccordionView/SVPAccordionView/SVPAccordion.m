@@ -15,10 +15,10 @@
 
 @property (strong, nonatomic) UIScrollView *accordionScrollView;
 @property (strong, nonatomic) UIView *accordionView;
-
-@property (strong, nonatomic) UIView *previousElement;
 @property (strong, nonatomic) NSArray *sections;
+@property (assign, nonatomic) CGFloat ySectionPosition;
 @property (assign, nonatomic) CGFloat separatorHeight;
+@property (strong, nonatomic) UIView *previousElement;
 
 @end
 
@@ -50,7 +50,6 @@
         _accordionScrollView = [[UIScrollView alloc] init];
         [_accordionScrollView setScrollEnabled:YES];
         _accordionView = [[UIView alloc] initWithFrame:self.bounds];
-        [_accordionView setBackgroundColor:[UIColor yellowColor]];
         [self addSubviews];
     }
     return self;
@@ -58,7 +57,16 @@
 
 #pragma mark - View management
 - (void)addSubviews{
+<<<<<<< HEAD:SVPFeatherControls/SVPFeatherControls/Views/SVPAccordionView/SVPAccordionView/SVPAccordion.m
+<<<<<<< HEAD:SVPFeatherControls/SVPFeatherControls/Views/SVPAccordionView/SVPAccordionView/SVPAccordion.m
+    [self.accordionView setBackgroundColor:[UIColor whiteColor]];
+=======
+=======
+>>>>>>> parent of 56b5b94... Code refactored.:SVPAccordionView/SVPAccordionView/SVPAccordion.m
+    self.ySectionPosition = 0.0f;
+    
     [self.accordionView setBackgroundColor:[UIColor blueColor]];
+>>>>>>> parent of 56b5b94... Code refactored.:SVPAccordionView/SVPAccordionView/SVPAccordion.m
     [self.accordionScrollView addSubview:self.accordionView];
     [self addSubview:self.accordionScrollView];
     
@@ -304,8 +312,6 @@
                 
                 [UIView animateWithDuration:0.5f animations:^{
                     [self layoutIfNeeded];
-                } completion:^(BOOL finished) {
-                    self.accordionScrollView;
                 }];
             } else {
                 // Expand on tap

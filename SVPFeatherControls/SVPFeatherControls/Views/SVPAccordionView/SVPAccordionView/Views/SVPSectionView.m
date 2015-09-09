@@ -40,7 +40,6 @@
     return self;
 }
 
-#pragma mark - View management
 - (void) setHeightConstraintConstant: (CGFloat)constant{
     [self.heightConstraint setConstant:constant];
 }
@@ -115,9 +114,10 @@
     [self addConstraint:[cell topConstraint]];
 }
 
-#pragma mark - SVPSectionHeaderCellViewProtocol
 -(void)userDidTapOnHeader{
     [self.delegate sectionWillResize:self];
 }
 
 @end
+
+#warning TODO: Fix separator height on every place

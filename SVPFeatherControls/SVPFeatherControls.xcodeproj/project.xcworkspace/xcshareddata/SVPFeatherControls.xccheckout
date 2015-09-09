@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>069EFFF9-AE9B-48DB-BEB5-E09E9A96E04D</string>
+	<key>IDESourceControlProjectName</key>
+	<string>SVPFeatherControls</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>427C7FDB7391980661781B9E56588A36691E2E83</key>
+		<string>https://github.com/svetoslavpopov93/SVPFeatherControls.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>SVPFeatherControls/SVPFeatherControls.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>427C7FDB7391980661781B9E56588A36691E2E83</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/svetoslavpopov93/SVPFeatherControls.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>427C7FDB7391980661781B9E56588A36691E2E83</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>427C7FDB7391980661781B9E56588A36691E2E83</string>
+			<key>IDESourceControlWCCName</key>
+			<string>SVPFeatherControls</string>
+		</dict>
+	</array>
+</dict>
+</plist>

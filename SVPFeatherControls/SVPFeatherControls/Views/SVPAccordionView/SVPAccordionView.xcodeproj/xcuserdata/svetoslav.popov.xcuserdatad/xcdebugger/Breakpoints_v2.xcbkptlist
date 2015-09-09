@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.ExceptionBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            scope = "0"
+            stopOnStyle = "0">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SVPAccordionView/SVPAccordion.m"
+<<<<<<< HEAD:SVPFeatherControls/SVPFeatherControls/Views/SVPAccordionView/SVPAccordionView.xcodeproj/xcuserdata/svetoslav.popov.xcuserdatad/xcdebugger/Breakpoints_v2.xcbkptlist
+<<<<<<< HEAD:SVPFeatherControls/SVPFeatherControls/Views/SVPAccordionView/SVPAccordionView.xcodeproj/xcuserdata/svetoslav.popov.xcuserdatad/xcdebugger/Breakpoints_v2.xcbkptlist
+            timestampString = "463494763.285256"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "163"
+            endingLineNumber = "163"
+=======
+            timestampString = "463492425.296183"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "166"
+            endingLineNumber = "166"
+>>>>>>> parent of 56b5b94... Code refactored.:SVPAccordionView/SVPAccordionView.xcodeproj/xcuserdata/svetoslav.popov.xcuserdatad/xcdebugger/Breakpoints_v2.xcbkptlist
+=======
+            timestampString = "463492425.296183"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "166"
+            endingLineNumber = "166"
+>>>>>>> parent of 56b5b94... Code refactored.:SVPAccordionView/SVPAccordionView.xcodeproj/xcuserdata/svetoslav.popov.xcuserdatad/xcdebugger/Breakpoints_v2.xcbkptlist
+            landmarkName = "-reloadAccordion"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+<<<<<<< HEAD:SVPFeatherControls/SVPFeatherControls/Views/SVPAccordionView/SVPAccordionView.xcodeproj/xcuserdata/svetoslav.popov.xcuserdatad/xcdebugger/Breakpoints_v2.xcbkptlist
+=======
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SVPAccordionView/SVPAccordion.m"
+            timestampString = "463492425.296183"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "310"
+            endingLineNumber = "310"
+            landmarkName = "-sectionWillResize:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+>>>>>>> parent of 56b5b94... Code refactored.:SVPAccordionView/SVPAccordionView.xcodeproj/xcuserdata/svetoslav.popov.xcuserdatad/xcdebugger/Breakpoints_v2.xcbkptlist
+   </Breakpoints>
+</Bucket>

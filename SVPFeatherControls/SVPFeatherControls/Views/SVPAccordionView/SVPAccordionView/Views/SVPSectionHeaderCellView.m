@@ -25,17 +25,17 @@
     if (self) {
         _separatorHeight = 1.0f;
         _contentView = contentView;
-        [_contentView setBackgroundColor:[UIColor greenColor]];// temp
+        [_contentView setBackgroundColor:[UIColor whiteColor]];// temp
         
         _separatorView = [[UIView alloc] init];
         [_separatorView setBackgroundColor:[UIColor grayColor]];
         
         _title = [[UILabel alloc] init];
         _title.textColor = [UIColor blueColor];
-        _title.backgroundColor=[UIColor purpleColor];
+        _title.backgroundColor=[UIColor clearColor];
         _title.textColor=[UIColor whiteColor];
         _title.userInteractionEnabled=NO;
-        _title.text= @"TEST"; // temp
+        
         [_contentView addSubview:_title];
         
         UITapGestureRecognizer *singleFingerTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap:)];
@@ -47,7 +47,33 @@
     return self;
 }
 
-#pragma mark - View managements
+//- (instancetype)initWithFrame:(CGRect)frame
+//{
+//    self = [super initWithFrame:frame];
+//    if (self) {
+//        _separatorHeight = 1.0f;
+//        _contentView = [[UIView alloc] init];
+//        [_contentView setBackgroundColor:[UIColor greenColor]];// temp
+//        
+//        _separatorView = [[UIView alloc] init];
+//        [_separatorView setBackgroundColor:[UIColor grayColor]];
+//        
+//        _title = [[UILabel alloc] init];
+//        _title.textColor = [UIColor blueColor];
+//        _title.backgroundColor=[UIColor purpleColor];
+//        _title.textColor=[UIColor whiteColor];
+//        _title.userInteractionEnabled=NO;
+//        _title.text= @"TEST"; // temp
+//        [_contentView addSubview:_title];
+//        
+//        UITapGestureRecognizer *singleFingerTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap:)];
+//        [self addGestureRecognizer:singleFingerTap];
+//        
+//        [self addSubviews];
+//    }
+//    return self;
+//}
+
 - (void)addSubviews{
     [self addSubview:self.contentView];
     [self addSubview:self.separatorView];
@@ -191,7 +217,6 @@
     [self addConstraint:separatorViewBottomConstraint];
 }
 
-#pragma mark - User action methods
 - (void)handleSingleTap:(UITapGestureRecognizer *)recognizer {
     [self.delegate userDidTapOnHeader];
 }
