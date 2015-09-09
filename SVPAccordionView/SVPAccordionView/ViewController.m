@@ -18,7 +18,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.accordion = [[SVPAccordion alloc] initWithFrame:CGRectMake(10, 10, 300, 300)];
+    self.accordion = [[SVPAccordion alloc] initWithFrame:CGRectMake(50, 10, 300, 300)];
     self.accordion.datasource = self;
     self.accordion.delegate = self;
     
@@ -27,7 +27,6 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -39,7 +38,7 @@
 #pragma mark - SVPAccordionDatasource
 
 - (NSInteger)numberOfSections{
-    return 3;
+    return 48;
 }
 
 - (NSInteger)numberOfRowsInSection:(NSInteger)sectionIndex{
@@ -53,8 +52,6 @@
 }
 
 - (UIView *)cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-#warning TODO: FIX cellForRowAtIndexPath
     UIView *rowCell = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.accordion.frame.size.width, 30)];
     
     return rowCell;

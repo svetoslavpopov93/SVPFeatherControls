@@ -13,7 +13,8 @@
 
 @interface SVPAccordion()<SVPSectionViewProtocol>
 
-@property (strong, nonatomic) UIScrollView *accordion;
+@property (strong, nonatomic) UIScrollView *accordionScrollView;
+@property (strong, nonatomic) UIView *accordionView;
 @property (strong, nonatomic) NSArray *sections;
 @property (assign, nonatomic) CGFloat ySectionPosition;
 @property (assign, nonatomic) CGFloat separatorHeight;
@@ -46,57 +47,100 @@
     if (self) {
         _sections = [[NSArray alloc] init];
         _separatorHeight = 1.0f;
-        _accordion = [[UIScrollView alloc] initWithFrame:self.bounds];
+        _accordionScrollView = [[UIScrollView alloc] init];
+        [_accordionScrollView setScrollEnabled:YES];
+        _accordionView = [[UIView alloc] initWithFrame:self.bounds];
+        [_accordionView setBackgroundColor:[UIColor yellowColor]];
         [self addSubviews];
     }
     return self;
 }
 
+#pragma mark - View management
 - (void)addSubviews{
     self.ySectionPosition = 0.0f;
     
-    [_accordion setBackgroundColor:[UIColor blueColor]];
-    [self addSubview:_accordion];
+    [self.accordionView setBackgroundColor:[UIColor blueColor]];
+    [self.accordionScrollView addSubview:self.accordionView];
+    [self addSubview:self.accordionScrollView];
     
     [self setAccordionConstraints];
 }
 
 - (void)setAccordionConstraints{
-    [_accordion setTranslatesAutoresizingMaskIntoConstraints:NO];// Set accordion constraints
-
-    NSLayoutConstraint *leadingConstraint = [NSLayoutConstraint constraintWithItem:self.accordion
+    // Setup accordionScrollView constraints
+    [self.accordionScrollView setTranslatesAutoresizingMaskIntoConstraints:NO];
+    
+    NSLayoutConstraint *accordionScrollViewLeadingConstraint = [NSLayoutConstraint constraintWithItem:self.accordionScrollView
                                                                          attribute:NSLayoutAttributeLeading
                                                                          relatedBy:NSLayoutRelationEqual
                                                                             toItem:self
                                                                          attribute:NSLayoutAttributeLeading
                                                                         multiplier:1
                                                                           constant:0];
-    NSLayoutConstraint *topConstraint = [NSLayoutConstraint constraintWithItem:self.accordion
-                                                                           attribute:NSLayoutAttributeTop
-                                                                           relatedBy:NSLayoutRelationEqual
-                                                                              toItem:self
-                                                                           attribute:NSLayoutAttributeTop
-                                                                          multiplier:1
-                                                                            constant:0];
-    NSLayoutConstraint *trailingConstraint = [NSLayoutConstraint constraintWithItem:self.accordion
+    NSLayoutConstraint *accordionScrollViewTopConstraint = [NSLayoutConstraint constraintWithItem:self.accordionScrollView
+                                                                     attribute:NSLayoutAttributeTop
+                                                                     relatedBy:NSLayoutRelationEqual
+                                                                        toItem:self
+                                                                     attribute:NSLayoutAttributeTop
+                                                                    multiplier:1
+                                                                      constant:0];
+    NSLayoutConstraint *accordionScrollViewTrailingConstraint = [NSLayoutConstraint constraintWithItem:self.accordionScrollView
                                                                           attribute:NSLayoutAttributeTrailing
                                                                           relatedBy:NSLayoutRelationEqual
                                                                              toItem:self
                                                                           attribute:NSLayoutAttributeTrailing
                                                                          multiplier:1
                                                                            constant:0];
-    NSLayoutConstraint *bottomConstraint = [NSLayoutConstraint constraintWithItem:self.accordion
+        NSLayoutConstraint *accordionScrollViewbottomConstraint = [NSLayoutConstraint constraintWithItem:self.accordionScrollView
+                                                                            attribute:NSLayoutAttributeBottom
+                                                                            relatedBy:NSLayoutRelationEqual
+                                                                               toItem:self
+                                                                            attribute:NSLayoutAttributeBottom
+                                                                           multiplier:1
+                                                                             constant:0];
+    
+    [self addConstraint:accordionScrollViewLeadingConstraint];
+    [self addConstraint:accordionScrollViewTopConstraint];
+    [self addConstraint:accordionScrollViewTrailingConstraint];
+    [self addConstraint:accordionScrollViewbottomConstraint];
+    
+    // Setup accordionView constraints
+    [self.accordionView setTranslatesAutoresizingMaskIntoConstraints:NO];
+
+    NSLayoutConstraint *accordionViewLeadingConstraint = [NSLayoutConstraint constraintWithItem:self.accordionView
+                                                                         attribute:NSLayoutAttributeLeading
+                                                                         relatedBy:NSLayoutRelationEqual
+                                                                            toItem:self.accordionScrollView
+                                                                         attribute:NSLayoutAttributeLeading
+                                                                        multiplier:1
+                                                                          constant:0];
+    NSLayoutConstraint *accordionViewTopConstraint = [NSLayoutConstraint constraintWithItem:self.accordionView
+                                                                           attribute:NSLayoutAttributeTop
+                                                                           relatedBy:NSLayoutRelationEqual
+                                                                              toItem:self.accordionScrollView
+                                                                           attribute:NSLayoutAttributeTop
+                                                                          multiplier:1
+                                                                            constant:0];
+    NSLayoutConstraint *accordionViewTrailingConstraint = [NSLayoutConstraint constraintWithItem:self.accordionView
+                                                                          attribute:NSLayoutAttributeWidth
+                                                                          relatedBy:NSLayoutRelationEqual
+                                                                             toItem:self.accordionScrollView
+                                                                          attribute:NSLayoutAttributeWidth
+                                                                         multiplier:1
+                                                                           constant:0];
+    NSLayoutConstraint *accordionViewBottomConstraint = [NSLayoutConstraint constraintWithItem:self.accordionView
                                                                         attribute:NSLayoutAttributeBottom
                                                                         relatedBy:NSLayoutRelationEqual
-                                                                           toItem:self 
+                                                                           toItem:self.accordionScrollView
                                                                         attribute:NSLayoutAttributeBottom
                                                                        multiplier:1
                                                                          constant:0];
     
-    [self addConstraint:leadingConstraint];
-    [self addConstraint:topConstraint];
-    [self addConstraint:trailingConstraint];
-    [self addConstraint:bottomConstraint];
+    [self.accordionScrollView addConstraint:accordionViewLeadingConstraint];
+    [self.accordionScrollView addConstraint:accordionViewTopConstraint];
+    [self.accordionScrollView addConstraint:accordionViewTrailingConstraint];
+    [self.accordionScrollView addConstraint:accordionViewBottomConstraint];
  }
 
 - (void) reloadAccordion{    
@@ -113,69 +157,80 @@
         SVPSectionView *sectionCell = [[SVPSectionView alloc] initWithSectionElements:[NSArray arrayWithArray:sectionElementsArray]];
         sectionCell.delegate = self;
         
-        // TEMP
-        if (index % 2 == 0) {
-            [sectionCell setBackgroundColor:[UIColor purpleColor]];
-        } else {
-            [sectionCell setBackgroundColor:[UIColor redColor]];
-        }
-        
-        [self.accordion addSubview:sectionCell];
+        [self.accordionView addSubview:sectionCell];
         
         [sectionCell setHeightConstraintConstant:CGRectGetHeight([[sectionElementsArray lastObject] frame])];
-        
-        NSLayoutConstraint *sectionCellWidthConstraint = [NSLayoutConstraint constraintWithItem:sectionCell
-                                                                                      attribute:NSLayoutAttributeWidth
-                                                                                      relatedBy:NSLayoutRelationEqual
-                                                                                         toItem:nil
-                                                                                      attribute:0
-                                                                                     multiplier:1
-                                                                                       constant:CGRectGetWidth(self.accordion.frame)];
-        
-        
-        NSLayoutConstraint *sectionCellLeadingConstraint = [NSLayoutConstraint constraintWithItem:sectionCell
-                                                                                        attribute:NSLayoutAttributeLeading
-                                                                                        relatedBy:NSLayoutRelationEqual
-                                                                                           toItem:self.accordion
-                                                                                        attribute:NSLayoutAttributeLeading
-                                                                                       multiplier:1
-                                                                                         constant:0];
-        
-        NSLayoutConstraint *sectionCellTopConstraint;
-        if (index == 0) {
-            self.previousElement = self.accordion;
-            sectionCellTopConstraint = [NSLayoutConstraint constraintWithItem:sectionCell
-                                                                    attribute:NSLayoutAttributeTop
-                                                                    relatedBy:NSLayoutRelationEqual
-                                                                       toItem:self.previousElement
-                                                                    attribute:NSLayoutAttributeTop
-                                                                   multiplier:1
-                                                                     constant:0];
-        } else{
-            sectionCellTopConstraint = [NSLayoutConstraint constraintWithItem:sectionCell
-                                                                    attribute:NSLayoutAttributeTop
-                                                                    relatedBy:NSLayoutRelationEqual
-                                                                       toItem:self.previousElement
-                                                                    attribute:NSLayoutAttributeBottom
-                                                                   multiplier:1
-                                                                     constant:0];
-        }
-        
-        NSLayoutConstraint *sectionCellTrailingConstraint = [NSLayoutConstraint constraintWithItem:sectionCell
-                                                                                         attribute:NSLayoutAttributeTrailing
-                                                                                         relatedBy:NSLayoutRelationEqual
-                                                                                            toItem:self.accordion
-                                                                                         attribute:NSLayoutAttributeTrailing
-                                                                                        multiplier:1
-                                                                                          constant:0];
-        
-        [sectionCell addConstraint:sectionCellWidthConstraint];
-        [self.accordion addConstraint:sectionCellLeadingConstraint];
-        [self.accordion addConstraint:sectionCellTopConstraint];
-        [self.accordion addConstraint:sectionCellTrailingConstraint];
+        [self setupSectionCellConstraints:sectionCell index:index];
         
         self.previousElement = sectionCell;
     }
+}
+
+- (void)setupSectionCellConstraints:(SVPSectionView*)sectionCell index:(NSInteger)index{
+    
+    NSLayoutConstraint *sectionCellWidthConstraint = [NSLayoutConstraint constraintWithItem:sectionCell
+                                                                                  attribute:NSLayoutAttributeWidth
+                                                                                  relatedBy:NSLayoutRelationEqual
+                                                                                     toItem:nil
+                                                                                  attribute:0
+                                                                                 multiplier:1
+                                                                                   constant:CGRectGetWidth(self.accordionView.frame)];
+    
+    
+    NSLayoutConstraint *sectionCellLeadingConstraint = [NSLayoutConstraint constraintWithItem:sectionCell
+                                                                                    attribute:NSLayoutAttributeLeading
+                                                                                    relatedBy:NSLayoutRelationEqual
+                                                                                       toItem:self.accordionView
+                                                                                    attribute:NSLayoutAttributeLeading
+                                                                                   multiplier:1
+                                                                                     constant:0];
+    
+    NSLayoutConstraint *sectionCellTopConstraint;
+    if (index == 0) {
+        self.previousElement = self.accordionView;
+        sectionCellTopConstraint = [NSLayoutConstraint constraintWithItem:sectionCell
+                                                                attribute:NSLayoutAttributeTop
+                                                                relatedBy:NSLayoutRelationEqual
+                                                                   toItem:self.previousElement
+                                                                attribute:NSLayoutAttributeTop
+                                                               multiplier:1
+                                                                 constant:0];
+    } else{
+        sectionCellTopConstraint = [NSLayoutConstraint constraintWithItem:sectionCell
+                                                                attribute:NSLayoutAttributeTop
+                                                                relatedBy:NSLayoutRelationEqual
+                                                                   toItem:self.previousElement
+                                                                attribute:NSLayoutAttributeBottom
+                                                               multiplier:1
+                                                                 constant:0];
+    }
+    
+    NSLayoutConstraint *sectionCellTrailingConstraint = [NSLayoutConstraint constraintWithItem:sectionCell
+                                                                                     attribute:NSLayoutAttributeTrailing
+                                                                                     relatedBy:NSLayoutRelationEqual
+                                                                                        toItem:self.accordionView
+                                                                                     attribute:NSLayoutAttributeTrailing
+                                                                                    multiplier:1
+                                                                                      constant:0];
+    if (index == [self getNumberOfSections] - 1) {
+        NSLayoutConstraint *sectionCellBottomConstraint = [NSLayoutConstraint constraintWithItem:sectionCell
+                                                                                       attribute:NSLayoutAttributeBottom
+                                                                                       relatedBy:NSLayoutRelationEqual
+                                                                                          toItem:self.accordionView
+                                                                                       attribute:NSLayoutAttributeBottom
+                                                                                      multiplier:1
+                                                                                        constant:0];
+        
+        [self.accordionView addConstraint:sectionCellBottomConstraint];
+    }
+    
+    
+    
+    
+    [sectionCell addConstraint:sectionCellWidthConstraint];
+    [self.accordionView addConstraint:sectionCellLeadingConstraint];
+    [self.accordionView addConstraint:sectionCellTopConstraint];
+    [self.accordionView addConstraint:sectionCellTrailingConstraint];
 }
 
 #pragma mark - Calculations
@@ -210,7 +265,7 @@
 #pragma mark - Delegate
 - (UIView*)getViewForSectionHeaderAtIndex:(NSInteger)sectionIndex{
     if ([self.delegate respondsToSelector:@selector(getViewForSectionHeaderAtIndex:)]) {
-        return [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.accordion.frame), 40)];
+        return [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.accordionView.frame), 40)];
     }
     
     return [self.delegate viewForSectionHeaderAtIndex:sectionIndex];
@@ -234,8 +289,9 @@
 
 #pragma mark - SVPSectionViewProtocol
 -(void)sectionWillResize:(SVPSectionView *)section{
-    for (id sectionCell in self.accordion.subviews) {
+    for (id sectionCell in self.accordionView.subviews) {
         if ( [sectionCell isKindOfClass:[SVPSectionView class]] ) {
+            // Close all taps that are not tapped
             CGFloat sectionHeight;
             
             if (!(sectionCell == section)) {
@@ -250,8 +306,11 @@
                 
                 [UIView animateWithDuration:0.5f animations:^{
                     [self layoutIfNeeded];
+                } completion:^(BOOL finished) {
+                    self.accordionScrollView;
                 }];
             } else {
+                // Expand on tap
                 sectionHeight = section.heightConstraint.constant;
                 
                 if (sectionHeight <= sectionBaseHeight) {
@@ -263,12 +322,12 @@
                             [[(SVPSectionCellView*)sectionElement topConstraint] setConstant:0.0f];
                         }
                     }
-                    
+
                     [UIView animateWithDuration:0.5f animations:^{
                         [self layoutIfNeeded];
                     }];
                 } else{
-                    // TODO: fix number of sections
+                    // Close tapped section if expanded
                     sectionHeight = sectionBaseHeight;
                     [section setHeightConstraintConstant:sectionHeight];
                     
@@ -281,7 +340,6 @@
                     [UIView animateWithDuration:0.5f animations:^{
                         [self layoutIfNeeded];
                     }];
-
                 }
             }
         }
