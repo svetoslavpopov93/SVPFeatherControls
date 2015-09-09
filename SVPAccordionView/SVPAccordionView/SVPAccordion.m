@@ -15,10 +15,10 @@
 
 @property (strong, nonatomic) UIScrollView *accordionScrollView;
 @property (strong, nonatomic) UIView *accordionView;
-@property (strong, nonatomic) NSArray *sections;
-@property (assign, nonatomic) CGFloat ySectionPosition;
-@property (assign, nonatomic) CGFloat separatorHeight;
+
 @property (strong, nonatomic) UIView *previousElement;
+@property (strong, nonatomic) NSArray *sections;
+@property (assign, nonatomic) CGFloat separatorHeight;
 
 @end
 
@@ -58,8 +58,6 @@
 
 #pragma mark - View management
 - (void)addSubviews{
-    self.ySectionPosition = 0.0f;
-    
     [self.accordionView setBackgroundColor:[UIColor blueColor]];
     [self.accordionScrollView addSubview:self.accordionView];
     [self addSubview:self.accordionScrollView];

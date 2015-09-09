@@ -37,6 +37,7 @@
     [self setupConstraints];
 }
 
+#pragma mark - View management
 - (void)setupConstraints {
     [self.contentView setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.separatorView setTranslatesAutoresizingMaskIntoConstraints:NO];
