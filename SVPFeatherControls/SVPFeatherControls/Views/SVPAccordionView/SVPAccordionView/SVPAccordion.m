@@ -50,7 +50,6 @@
         _accordionScrollView = [[UIScrollView alloc] init];
         [_accordionScrollView setScrollEnabled:YES];
         _accordionView = [[UIView alloc] initWithFrame:self.bounds];
-        [_accordionView setBackgroundColor:[UIColor yellowColor]];
         [self addSubviews];
     }
     return self;
@@ -58,7 +57,7 @@
 
 #pragma mark - View management
 - (void)addSubviews{
-    [self.accordionView setBackgroundColor:[UIColor blueColor]];
+    [self.accordionView setBackgroundColor:[UIColor whiteColor]];
     [self.accordionScrollView addSubview:self.accordionView];
     [self addSubview:self.accordionScrollView];
     
@@ -304,8 +303,6 @@
                 
                 [UIView animateWithDuration:0.5f animations:^{
                     [self layoutIfNeeded];
-                } completion:^(BOOL finished) {
-                    self.accordionScrollView;
                 }];
             } else {
                 // Expand on tap
